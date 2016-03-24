@@ -1,4 +1,4 @@
-package org.lanma.mqtttest;
+package org.lanma.lassandroid;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -18,14 +18,14 @@ import org.eclipse.paho.client.mqttv3.MqttMessage;
 import org.eclipse.paho.client.mqttv3.persist.MemoryPersistence;
 
 public class MainActivity extends AppCompatActivity implements MqttCallback {
-    private static String clientId = "TurtleCarAndroid";
+    private static String clientId = "LassAndroid";
     private static MqttClient mqttClient;
     //public static final String TOPIC = "TurtleCar";
     public static final String TOPIC_STATUS = "LASS/Test/PM25";
     public static final int QOS = 0;
     public static final int TIMEOUT = 3;
 
-    private LassInfo m_li;
+    private org.lanma.lassandroid.LassInfo m_li;
     TextView m_tvDevId;
     TextView m_tvPM25;
     TextView m_tvTemp;
@@ -34,12 +34,12 @@ public class MainActivity extends AppCompatActivity implements MqttCallback {
     EditText m_etFilter;
     private void initUI()
     {
-        m_tvDevId = (TextView)this.findViewById(R.id.tvDevId);
-        m_tvPM25 = (TextView)this.findViewById(R.id.tvPM25);
-        m_tvTemp = (TextView)this.findViewById(R.id.tvTemp);
-        m_tvHumi = (TextView)this.findViewById(R.id.tvHumi);
-        m_tvDateTime = (TextView)this.findViewById(R.id.tvDateTime);
-        m_etFilter = (EditText)this.findViewById(R.id.etFilter);
+        m_tvDevId = (TextView)this.findViewById(org.lanma.lassandroid.R.id.tvDevId);
+        m_tvPM25 = (TextView)this.findViewById(org.lanma.lassandroid.R.id.tvPM25);
+        m_tvTemp = (TextView)this.findViewById(org.lanma.lassandroid.R.id.tvTemp);
+        m_tvHumi = (TextView)this.findViewById(org.lanma.lassandroid.R.id.tvHumi);
+        m_tvDateTime = (TextView)this.findViewById(org.lanma.lassandroid.R.id.tvDateTime);
+        m_etFilter = (EditText)this.findViewById(org.lanma.lassandroid.R.id.etFilter);
     }
     private void processConnect(String brokerIp, String brokerPort) {
         String broker = "tcp://" + brokerIp + ":" + brokerPort;
@@ -65,16 +65,16 @@ public class MainActivity extends AppCompatActivity implements MqttCallback {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(org.lanma.lassandroid.R.layout.activity_main);
         initUI();
-        m_li = new LassInfo();
+        m_li = new org.lanma.lassandroid.LassInfo();
         processConnect("gpssensor.ddns.net", "1883");
     }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_main, menu);
+        getMenuInflater().inflate(org.lanma.lassandroid.R.menu.menu_main, menu);
         return true;
     }
 
@@ -86,7 +86,7 @@ public class MainActivity extends AppCompatActivity implements MqttCallback {
         int id = item.getItemId();
 
         //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
+        if (id == org.lanma.lassandroid.R.id.action_settings) {
             return true;
         }
 
@@ -100,7 +100,7 @@ public class MainActivity extends AppCompatActivity implements MqttCallback {
             }
         });
     }
-    private void processLassInfo(String sMessage,LassInfo li)
+    private void processLassInfo(String sMessage, org.lanma.lassandroid.LassInfo li)
     {
         li.clearData();
         String[] arrToken = sMessage.split("\\|");
