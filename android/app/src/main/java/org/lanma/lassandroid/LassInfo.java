@@ -10,6 +10,8 @@ public class LassInfo {
     public String sPM25;
     public String sTemp;
     public String sHumi;
+    public String sLat;
+    public String sLng;
     public LassInfo()
     {
         clearData();
@@ -22,5 +24,7 @@ public class LassInfo {
         sPM25="";
         sTemp="";
         sHumi="";
+        sLat="";
+        sLng="";
     }
 }
